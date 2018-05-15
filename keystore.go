@@ -2,7 +2,6 @@ package keystore
 
 import (
 	"fmt"
-	"strings"
 
 	logging "github.com/ipfs/go-log"
 	ci "github.com/libp2p/go-libp2p-crypto"
@@ -27,19 +26,3 @@ type Keystore interface {
 
 var ErrNoSuchKey = fmt.Errorf("no key by the given name was found")
 var ErrKeyExists = fmt.Errorf("key by that name already exists, refusing to overwrite")
-
-func validateName(name string) error {
-	if name == "" {
-		return fmt.Errorf("key names must be at least one character")
-	}
-
-	if strings.Contains(name, "/") {
-		return fmt.Errorf("key names may not contain slashes")
-	}
-
-	if strings.HasPrefix(name, ".") {
-		return fmt.Errorf("key names may not begin with a period")
-	}
-
-	return nil
-}

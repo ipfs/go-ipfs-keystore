@@ -3,8 +3,8 @@ package keystore
 import (
 	"fmt"
 
+	ci "github.com/libp2p/go-libp2p-crypto"
 	logging "gx/ipfs/QmRb5jh8z2E8hMGN2tkvs1yHynUanqnZ3UeKwgN1i9P1F8/go-log"
-	ci "gx/ipfs/QmaPbCnUMBohSGo3KnxEa2bHqyJVVeEEcwtqJAYxerieBo/go-libp2p-crypto"
 )
 
 var log = logging.Logger("keystore")
@@ -23,9 +23,12 @@ type Keystore interface {
 	// List returns a list of key identifier
 	List() ([]string, error)
 }
+
 // ErrNoSuchKey is returned if a key of the given name is not found in the store
 var ErrNoSuchKey = fmt.Errorf("no key by the given name was found")
+
 // ErrKeyExists is returned when writing a key would overwrite an existing key
 var ErrKeyExists = fmt.Errorf("key by that name already exists, refusing to overwrite")
+
 // ErrKeyFmt is returned when the key's format is invalid
 var ErrKeyFmt = fmt.Errorf("key has invalid format")

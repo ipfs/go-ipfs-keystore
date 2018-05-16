@@ -3,7 +3,7 @@ package keystore
 import (
 	"sync"
 
-	ci "gx/ipfs/QmaPbCnUMBohSGo3KnxEa2bHqyJVVeEEcwtqJAYxerieBo/go-libp2p-crypto"
+	ci "github.com/libp2p/go-libp2p-crypto"
 )
 
 // MutexKeystore contains a child keystore and a mutex.

@@ -1,6 +1,6 @@
 package keystore
 
-import ci "gx/ipfs/QmaPbCnUMBohSGo3KnxEa2bHqyJVVeEEcwtqJAYxerieBo/go-libp2p-crypto"
+import ci "github.com/libp2p/go-libp2p-crypto"
 
 type keyMap map[string]ci.PrivKey
 

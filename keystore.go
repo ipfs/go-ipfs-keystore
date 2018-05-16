@@ -3,8 +3,8 @@ package keystore
 import (
 	"fmt"
 
-	logging "github.com/ipfs/go-log"
-	ci "github.com/libp2p/go-libp2p-crypto"
+	logging "gx/ipfs/QmRb5jh8z2E8hMGN2tkvs1yHynUanqnZ3UeKwgN1i9P1F8/go-log"
+	ci "gx/ipfs/QmaPbCnUMBohSGo3KnxEa2bHqyJVVeEEcwtqJAYxerieBo/go-libp2p-crypto"
 )
 
 var log = logging.Logger("keystore")

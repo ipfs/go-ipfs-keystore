@@ -1,7 +1,7 @@
 package keystore
 
 import (
-	errors "github.com/pkg/errors"
+	errors "gx/ipfs/QmVmDhyTTUcQXFD1rRQ64fGLMSAoaQvNH3hwuaCFAPq2hy/errors"
 	"strings"
 )
 

@@ -2,66 +2,80 @@ package keystore
 
 import ci "github.com/libp2p/go-libp2p-crypto"
 
-// MemKeystore is an in memory keystore implementation that is not persisted to
-// any backing storage.
+type keyMap map[string]ci.PrivKey
+
+// MemKeystore is a keystore backed by an in-memory map
 type MemKeystore struct {
-	keys map[string]ci.PrivKey
+	values keyMap
 }
 
 func NewMemKeystore() *MemKeystore {
-	return &MemKeystore{make(map[string]ci.PrivKey)}
+	return &MemKeystore{
+		values: keyMap{},
+	}
 }
 
-// Has return whether or not a key exist in the Keystore
-func (mk *MemKeystore) Has(name string) (bool, error) {
-	_, ok := mk.keys[name]
-	return ok, nil
+// Has returns whether or not a key exists in the Keystore
+func (mk *MemKeystore) Has(k string) (bool, error) {
+	if err := validateName(k); err != nil {
+		return false, err
+	}
+	_, found := mk.values[k]
+	return found, nil
 }
 
 // Put store a key in the Keystore
-func (mk *MemKeystore) Put(name string, k ci.PrivKey) error {
-	if err := validateName(name); err != nil {
+func (mk *MemKeystore) Put(k string, v ci.PrivKey) error {
+	if err := validateName(k); err != nil {
 		return err
 	}
 
-	_, ok := mk.keys[name]
-	if ok {
+	_, found := mk.values[k]
+	if found {
 		return ErrKeyExists
 	}
 
-	mk.keys[name] = k
+	mk.values[k] = v
 	return nil
 }
 
 // Get retrieve a key from the Keystore
-func (mk *MemKeystore) Get(name string) (ci.PrivKey, error) {
-	if err := validateName(name); err != nil {
+func (mk *MemKeystore) Get(k string) (ci.PrivKey, error) {
+	if err := validateName(k); err != nil {
 		return nil, err
 	}
 
-	k, ok := mk.keys[name]
-	if !ok {
+	v, found := mk.values[k]
+	if !found {
 		return nil, ErrNoSuchKey
 	}
 
-	return k, nil
+	return v, nil
 }
 
 // Delete remove a key from the Keystore
-func (mk *MemKeystore) Delete(name string) error {
-	if err := validateName(name); err != nil {
+func (mk *MemKeystore) Delete(k string) error {
+	if err := validateName(k); err != nil {
 		return err
 	}
+	if _, found := mk.values[k]; !found {
+		return ErrNoSuchKey
+	}
 
-	delete(mk.keys, name)
+	delete(mk.values, k)
 	return nil
 }
 
 // List return a list of key identifier
 func (mk *MemKeystore) List() ([]string, error) {
-	out := make([]string, 0, len(mk.keys))
-	for k := range mk.keys {
-		out = append(out, k)
+	out := make([]string, 0, len(mk.values))
+	for k := range mk.values {
+		err := validateName(k)
+		if err == nil {
+			out = append(out, k)
+		} else {
+			log.Warningf("ignoring the invalid keyfile: %s", k)
+		}
 	}
 	return out, nil
 }

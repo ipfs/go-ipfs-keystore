@@ -26,3 +26,4 @@ type Keystore interface {
 
 var ErrNoSuchKey = fmt.Errorf("no key by the given name was found")
 var ErrKeyExists = fmt.Errorf("key by that name already exists, refusing to overwrite")
+var ErrKeyFmt = fmt.Errorf("key has invalid format")

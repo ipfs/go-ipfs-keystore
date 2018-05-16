@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	ci "gx/ipfs/QmaPbCnUMBohSGo3KnxEa2bHqyJVVeEEcwtqJAYxerieBo/go-libp2p-crypto"
+	ci "github.com/libp2p/go-libp2p-crypto"
 )
 
 // FSKeystore is a keystore backed by files in a given directory stored on disk.
@@ -97,7 +97,11 @@ func (ks *FSKeystore) Get(name string) (ci.PrivKey, error) {
 		return nil, err
 	}
 
-	return ci.UnmarshalPrivateKey(data)
+	pk, err := ci.UnmarshalPrivateKey(data)
+	if err != nil {
+		return nil, err
+	}
+	return pk, nil
 }
 
 // Delete removes a key from the Keystore

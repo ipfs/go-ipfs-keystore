@@ -9,13 +9,14 @@ type MemKeystore struct {
 	values keyMap
 }
 
+// NewMemKeystore returns a new map-based keystore
 func NewMemKeystore() *MemKeystore {
 	return &MemKeystore{
 		values: keyMap{},
 	}
 }
 
-// Has returns whether or not a key exists in the Keystore
+// Has returns whether or not a key exists in the keystore map
 func (mk *MemKeystore) Has(k string) (bool, error) {
 	if err := validateName(k); err != nil {
 		return false, err
@@ -24,7 +25,8 @@ func (mk *MemKeystore) Has(k string) (bool, error) {
 	return found, nil
 }
 
-// Put store a key in the Keystore
+// Put stores a key in the map, if a key with the same name already exists,
+// returns ErrKeyExists
 func (mk *MemKeystore) Put(k string, v ci.PrivKey) error {
 	if err := validateName(k); err != nil {
 		return err
@@ -39,7 +41,7 @@ func (mk *MemKeystore) Put(k string, v ci.PrivKey) error {
 	return nil
 }
 
-// Get retrieve a key from the Keystore
+// Get retrieves a key from the map if it exists, else it returns ErrNoSuchKey
 func (mk *MemKeystore) Get(k string) (ci.PrivKey, error) {
 	if err := validateName(k); err != nil {
 		return nil, err
@@ -53,7 +55,7 @@ func (mk *MemKeystore) Get(k string) (ci.PrivKey, error) {
 	return v, nil
 }
 
-// Delete remove a key from the Keystore
+// Delete removes a key from the map
 func (mk *MemKeystore) Delete(k string) error {
 	if err := validateName(k); err != nil {
 		return err
@@ -66,7 +68,7 @@ func (mk *MemKeystore) Delete(k string) error {
 	return nil
 }
 
-// List return a list of key identifier
+// List returns a list of key identifiers in random order
 func (mk *MemKeystore) List() ([]string, error) {
 	out := make([]string, 0, len(mk.values))
 	for k := range mk.values {

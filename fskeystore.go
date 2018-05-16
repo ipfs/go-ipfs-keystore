@@ -28,7 +28,7 @@ func NewFSKeystore(dir string) (*FSKeystore, error) {
 	return &FSKeystore{dir}, nil
 }
 
-// Has returns whether or not a key exist in the Keystore
+// Has returns whether or not a key exists in the Keystore
 func (ks *FSKeystore) Has(name string) (bool, error) {
 	kp := filepath.Join(ks.dir, name)
 
@@ -115,7 +115,7 @@ func (ks *FSKeystore) Delete(name string) error {
 	return os.Remove(kp)
 }
 
-// List return a list of key identifier
+// List returns a list of key identifiers
 func (ks *FSKeystore) List() ([]string, error) {
 	dir, err := os.Open(ks.dir)
 	if err != nil {

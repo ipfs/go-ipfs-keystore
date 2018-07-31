@@ -8,7 +8,7 @@
   },
   "gxDependencies": [
     {
-      "hash": "QmQCqiR5F3NeJRr7LuWq8i8FgtT65ypZw5v9V6Es6nwFBD",
+      "hash": "QmcVVHfdyv15GVPk7NrxdWjh2hLVccXnoD8j2tyQShiXJb",
       "name": "go-log",
       "version": "1.5.3"
     },
@@ -29,6 +29,6 @@
   "language": "go",
   "license": "MIT",
   "name": "go-ipfs-keystore",
-  "version": "0.0.3"
+  "version": "0.0.4"
 }
 

@@ -241,4 +241,3 @@ func TestMakeKeystoreNoDir(t *testing.T) {
 		t.Fatal("shouldnt be able to make a keystore in a nonexistant directory")
 	}
 }
-

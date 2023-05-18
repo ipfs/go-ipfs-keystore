@@ -17,6 +17,8 @@ var log = logging.Logger("keystore")
 var codec = base32.StdEncoding.WithPadding(base32.NoPadding)
 
 // Keystore provides a key management interface
+//
+// Deprecated: use github.com/ipfs/boxo/keystore.Keystore
 type Keystore interface {
 	// Has returns whether or not a key exists in the Keystore
 	Has(string) (bool, error)
@@ -32,19 +34,27 @@ type Keystore interface {
 }
 
 // ErrNoSuchKey is an error message returned when no key of a given name was found.
+//
+// Deprecated: use github.com/ipfs/boxo/keystore.ErrNoSuchKey
 var ErrNoSuchKey = fmt.Errorf("no key by the given name was found")
 
 // ErrKeyExists is an error message returned when a key already exists
+//
+// Deprecated: use github.com/ipfs/boxo/keystore.ErrKeyExists
 var ErrKeyExists = fmt.Errorf("key by that name already exists, refusing to overwrite")
 
 const keyFilenamePrefix = "key_"
 
 // FSKeystore is a keystore backed by files in a given directory stored on disk.
+//
+// Deprecated: use github.com/ipfs/boxo/keystore.FSKeystore
 type FSKeystore struct {
 	dir string
 }
 
 // NewFSKeystore returns a new filesystem-backed keystore.
+//
+// Deprecated: use github.com/ipfs/boxo/keystore.NewFSKeystore
 func NewFSKeystore(dir string) (*FSKeystore, error) {
 	err := os.Mkdir(dir, 0700)
 	switch {

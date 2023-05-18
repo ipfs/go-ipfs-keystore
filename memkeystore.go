@@ -8,11 +8,15 @@ import (
 
 // MemKeystore is an in memory keystore implementation that is not persisted to
 // any backing storage.
+//
+// Deprecated: use github.com/ipfs/boxo/keystore.MemKeystore
 type MemKeystore struct {
 	keys map[string]ci.PrivKey
 }
 
 // NewMemKeystore creates a MemKeystore.
+//
+// Deprecated: use github.com/ipfs/boxo/keystore.NewMemKeystore
 func NewMemKeystore() *MemKeystore {
 	return &MemKeystore{make(map[string]ci.PrivKey)}
 }

@@ -21,7 +21,6 @@ go-ipfs-keystore provides the Keystore interface for key management.  Keystores 
 
 - [Install](#install)
 - [Usage](#usage)
-- [Contribute](#contribute)
 - [License](#license)
 
 ## Install
@@ -35,10 +34,6 @@ go-ipfs-keystore provides the Keystore interface for key management.  Keystores 
 ```
 import "github.com/ipfs/go-ipfs-keystore"
 ```
-
-## Contribute
-
-PRs accepted.
 
 ## License
 
